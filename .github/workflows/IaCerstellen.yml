@@ -28,28 +28,23 @@ jobs:
 
       # Initialize Terraform
       - name: Terraform init
-        run: terraform init
-        working-directory: terraform  # Verzeichnis, in dem sich Ihre Terraform-Dateien befinden
+        run: terraform init 
 
       # Format check
       - name: Terraform fmt check
         run: terraform fmt -check
-        working-directory: terraform
 
       # Validate Terraform configuration
       - name: Terraform validate
         run: terraform validate
-        working-directory: terraform
 
       # Terraform plan
       - name: Terraform plan
         run: terraform plan
-        working-directory: terraform
 
       # Apply Terraform configuration (only if you want to apply automatically)
       - name: Terraform apply
         run: terraform apply -auto-approve
-        working-directory: terraform
 
       # Destroy Terraform resources (optional, uncomment if needed)
       # - name: Terraform destroy
