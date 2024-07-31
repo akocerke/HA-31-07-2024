@@ -91,8 +91,8 @@ provider "aws" {
 
 # VPC-Modul
 module "vpc" {
-  source = "./vpc"
-  cidr_block = "10.0.0.0/16"  # Beispiel für Eingabewert
+  source     = "./vpc"
+  cidr_block = "10.0.0.0/16" # Beispiel für Eingabewert
 }
 
 # Subnetz-Modul
@@ -109,8 +109,8 @@ module "security_group" {
 
 # EC2-Modul
 module "ec2" {
-  source = "./ec2"
-  vpc_id            = module.vpc.vpc_id
+  source             = "./ec2"
+  vpc_id             = module.vpc.vpc_id
   subnet_id          = module.subnet.subnet_id
   security_group_ids = [module.security_group.security_group_id]
 }
