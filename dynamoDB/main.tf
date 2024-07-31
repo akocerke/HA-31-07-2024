@@ -1,15 +1,10 @@
 resource "aws_dynamodb_table" "example" {
-  name         = "example-table"
-  billing_mode = "PAY_PER_REQUEST"  # Alternativ: "PROVISIONED"
-  hash_key     = "ID"
-
+  name           = "new-example-table"  # Ändern Sie den Namen hier
+  hash_key       = "id"
+  read_capacity  = 1
+  write_capacity = 1
   attribute {
-    name = "ID"
-    type = "S"  # S für String
-  }
-
-  tags = {
-    Name = "example-dynamodb-table"
+    name = "id"
+    type = "S"
   }
 }
-
