@@ -1,5 +1,4 @@
-variable "vpc_id" {
-  description = "The ID of the existing VPC"
+variable "cidr_block" {
+  description = "The CIDR block for the VPC"
   type        = string
-  default     = "vpc-0835eba4486f61ef0"  # Ihre VPC-ID hier einfügen
 }
