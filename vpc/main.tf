@@ -4,6 +4,4 @@ resource "aws_vpc" "main" {
   # Weitere Konfigurationen...
 }
 
-output "vpc_id" {
-  value = aws_vpc.main.id
-}
+

@@ -8,6 +8,4 @@ resource "aws_lambda_function" "example" {
   # Weitere Konfigurationen...
 }
 
-output "lambda_function_name" {
-  value = aws_lambda_function.example.function_name
-}
+
