@@ -1,26 +1,23 @@
-name: Terraform Deploy 2
+name: Terraform deploy
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:  # Ermöglicht manuelles Triggern des Workflows über GitHub UI
 
 jobs:
-  terraform:
-    name: Terraform
+  terraform-deploy:
     runs-on: ubuntu-latest
     steps:
+      # Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Terraform
+      # Setup Terraform
+      - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.5.0
+          terraform_version: 1.9.3  # Stellen Sie sicher, dass diese Version korrekt ist
 
+      # Configure AWS Credentials
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -29,28 +26,32 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
 
-      - name: Terraform Format Check
-        run: terraform fmt --check
-        # Optional: Fail the workflow if `terraform fmt --check` finds formatting issues
-        continue-on-error: true
-
-      - name: Terraform Validate
-        run: terraform validate
-
-      - name: Terraform Init
+      # Initialize Terraform
+      - name: Terraform init
         run: terraform init
+        working-directory: terraform  # Verzeichnis, in dem sich Ihre Terraform-Dateien befinden
 
-      - name: Terraform Plan
+      # Format check
+      - name: Terraform fmt check
+        run: terraform fmt -check
+        working-directory: terraform
+
+      # Validate Terraform configuration
+      - name: Terraform validate
+        run: terraform validate
+        working-directory: terraform
+
+      # Terraform plan
+      - name: Terraform plan
         run: terraform plan
-        # Optional: Save the plan output as an artifact for review
-        continue-on-error: true
+        working-directory: terraform
 
-      - name: Terraform Apply
+      # Apply Terraform configuration (only if you want to apply automatically)
+      - name: Terraform apply
         run: terraform apply -auto-approve
-        # Optional: Run this step only on specific branches or tags
-        if: github.ref == 'refs/heads/main'
+        working-directory: terraform
 
-    #   - name: Terraform Destroy
-    #     run: terraform destroy -auto-approve
-        # Optional: Run this step only on specific branches or tags
-        # if: github.ref == 'refs/heads/cleanup'
+      # Destroy Terraform resources (optional, uncomment if needed)
+      # - name: Terraform destroy
+      #   run: terraform destroy -auto-approve
+      #   working-directory: terraform
