@@ -121,9 +121,9 @@ module "dynamodb" {
 }
 
 # Lambda-Modul
-module "lambda" {
-  source = "./lambda"
-}
+# module "lambda" {
+#   source = "./lambda"
+# }
 
 # S3-Bucket-Modul
 module "s3_bucket" {
