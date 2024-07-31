@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "example" {
-  bucket = var.bucket_name
+  
 
   # Optional: Tags hinzufügen (kann weggelassen werden, wenn nicht benötigt)
   tags = {
@@ -11,6 +11,4 @@ resource "aws_s3_bucket" "example" {
   }
 }
 
-output "bucket_name" {
-  value = aws_s3_bucket.example.bucket
-}
+
