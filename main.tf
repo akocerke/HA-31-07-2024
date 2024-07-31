@@ -135,9 +135,7 @@ output "instance_public_ip" {
   value = module.ec2.instance_public_ip
 }
 
-output "dynamodb_table_name" {
-  value = module.dynamodb.dynamodb_table_name
-}
+
 
 output "s3_bucket_name" {
   value = module.s3_bucket.bucket_name
