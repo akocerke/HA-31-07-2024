@@ -11,7 +11,7 @@ resource "aws_instance" "my_instance" {
 
 resource "aws_subnet" "my_subnet" {
   vpc_id                  = var.vpc_id
-  cidr_block              = "10.0.1.0/16"
+  cidr_block              = "10.0.2.0/24"
   availability_zone       = "eu-central-1a"
 
   tags = {
